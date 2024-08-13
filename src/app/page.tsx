@@ -5,6 +5,7 @@ import scrape from "@/api/scrape";
 type CityData = {
   name: string;
   population: string;
+  populationChange: string;
   medianIncome: string;
   medianHomeValue: string;
   nearestCities: string;
@@ -25,8 +26,8 @@ export default function Home() {
       {cityData && (
         <section className="flex flex-col gap-4">
           <h1 className="text-4xl font-bold">{cityData.name}</h1>
-          <p>{cityData.population.split(". ")[0]}</p>
-          <p>{cityData.population.split(". ")[1]}</p>
+          <p>{cityData.population}</p>
+          <p>{cityData.populationChange}</p>
           <p>{cityData.medianIncome}</p>
           <p>{cityData.medianHomeValue}</p>
           <p>{cityData.nearestCities}</p>
