@@ -10,16 +10,15 @@ import { LoaderPinwheel, CircleX } from "lucide-react";
 export default function Home() {
   const [city, setCity] = useState<string>("");
   const [state, setState] = useState<string>("");
-  const [name, setName] = useState<string | undefined>();
-  const [population, setPopulation] = useState<string | undefined>();
-  const [populationChange, setPopulationChange] = useState<
-    string | undefined
-  >();
-  const [medianIncome, setMedianIncome] = useState<string | undefined>();
-  const [medianHomeValue, setMedianHomeValue] = useState<string | undefined>();
-  const [nearestCities, setNearestCities] = useState<string | undefined>();
+  const [name, setName] = useState<string>();
+  const [population, setPopulation] = useState<string>();
+  const [populationChange, setPopulationChange] = useState<string>();
+  const [medianIncome, setMedianIncome] = useState<string>();
+  const [medianHomeValue, setMedianHomeValue] = useState<string>();
+  const [crimeRate, setCrimeRate] = useState<string>();
+  const [nearestCities, setNearestCities] = useState<string>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [errMsg, setErrMsg] = useState<string | undefined>();
+  const [errMsg, setErrMsg] = useState<string>();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -31,6 +30,7 @@ export default function Home() {
       populationChange,
       medianIncome,
       medianHomeValue,
+      crimeRate,
       nearestCities,
     } = await fetchCityData(city, state);
     if (!name) {
@@ -44,6 +44,7 @@ export default function Home() {
     setPopulationChange(populationChange);
     setMedianIncome(medianIncome);
     setMedianHomeValue(medianHomeValue);
+    setCrimeRate(crimeRate);
     setNearestCities(nearestCities);
   };
   return (
@@ -114,6 +115,7 @@ export default function Home() {
             <p>{populationChange}</p>
             <p>{medianIncome}</p>
             <p>{medianHomeValue}</p>
+            <p>Crime rate in 2022: {crimeRate} (The U.S. average is 246.1)</p>
             <p>{nearestCities}</p>
           </CardContent>
         </Card>
