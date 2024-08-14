@@ -16,6 +16,7 @@ export default function Home() {
   const [medianIncome, setMedianIncome] = useState<string>();
   const [medianHomeValue, setMedianHomeValue] = useState<string>();
   const [crimeRate, setCrimeRate] = useState<string>();
+  const [educationAndCommute, setEducationAndCommute] = useState<string[]>();
   const [nearestCities, setNearestCities] = useState<string>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errMsg, setErrMsg] = useState<string>();
@@ -31,6 +32,7 @@ export default function Home() {
       medianIncome,
       medianHomeValue,
       crimeRate,
+      educationAndCommute,
       nearestCities,
     } = await fetchCityData(city, state);
     if (!name) {
@@ -45,6 +47,7 @@ export default function Home() {
     setMedianIncome(medianIncome);
     setMedianHomeValue(medianHomeValue);
     setCrimeRate(crimeRate);
+    setEducationAndCommute(educationAndCommute);
     setNearestCities(nearestCities);
   };
   return (
@@ -111,11 +114,19 @@ export default function Home() {
             <CardTitle>{name}</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col gap-4">
+            <h2 className="text-xl font-bold">Population</h2>
             <p>{population}</p>
             <p>{populationChange}</p>
+            <h2 className="text-xl font-bold">Income and Home Value</h2>
             <p>{medianIncome}</p>
             <p>{medianHomeValue}</p>
+            <h2 className="text-xl font-bold">Crime</h2>
             <p>Crime rate in 2022: {crimeRate} (The U.S. average is 246.1)</p>
+            <h2 className="text-xl font-bold">Education and Commute</h2>
+            {educationAndCommute?.map((education, index) => (
+              <p key={index}>{education}</p>
+            ))}
+            <h2 className="text-xl font-bold">Nearest Cities</h2>
             <p>{nearestCities}</p>
           </CardContent>
         </Card>

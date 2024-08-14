@@ -5,6 +5,7 @@ type CityData = {
   medianIncome: string;
   medianHomeValue: string;
   crimeRate: string;
+  educationAndCommute: string[];
   nearestCities: string;
 };
 
