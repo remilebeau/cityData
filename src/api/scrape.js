@@ -1,16 +1,13 @@
 "use server";
 import puppeteer from "puppeteer";
 
-export default async function scrape(
-  city: string,
-  state: string
-): Promise<CityData> {
+export default async function scrape(city, state) {
   // format city
   city = city.replace(" ", "-");
   // format state
   if (state.length == 2) {
     state = state.toUpperCase();
-    const states: { [key: string]: string } = {
+    const states = {
       AL: "Alabama",
       AK: "Alaska",
       AS: "American Samoa",
