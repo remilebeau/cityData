@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import scrape from "@/api/scrape";
 
 type CityData = {
@@ -13,15 +13,38 @@ type CityData = {
 
 export default function Home() {
   const [cityData, setCityData] = useState<CityData | null>(null);
-  const fetchData = async () => {
-    const data = await scrape();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const city = formData.get("city") as string;
+    const state = formData.get("state") as string;
+    const data = await scrape(city, state);
     setCityData(data);
   };
-  useEffect(() => {
-    fetchData();
-  }, []);
   return (
     <main className="flex flex-col gap-4 p-4">
+      <form onSubmit={handleSubmit}>
+        <label>
+          City:
+          <input
+            type="text"
+            name="city"
+            id="city"
+            className="text-black border rounded p-2"
+          />
+        </label>
+        <label>
+          State:
+          <input
+            type="text"
+            name="state"
+            id="state"
+            className="text-black border rounded p-2"
+          />
+        </label>
+        <button type="submit">Submit</button>
+      </form>
       {!cityData && <p>Loading...</p>}
       {cityData && (
         <section className="flex flex-col gap-4">
