@@ -1,6 +1,9 @@
 "use client";
 import { useState } from "react";
 import fetchCityData from "@/lib/fetchCityData";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 export default function Home() {
   const [city, setCity] = useState<string>("");
@@ -42,7 +45,7 @@ export default function Home() {
     setNearestCities(nearestCities);
   };
   return (
-    <main className="flex flex-col gap-4 p-4 mx-auto max-w-4xl min-h-screen">
+    <main className="flex flex-col gap-4 p-4 mx-auto max-w-4xl">
       <section className="flex flex-col gap-4 p-4">
         <h1 className="text-4xl font-bold">City Data</h1>
         <p className="text-2xl">
@@ -59,8 +62,8 @@ export default function Home() {
         </p>
       </section>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <label htmlFor="city">City:</label>
-        <input
+        <Label htmlFor="city">City:</Label>
+        <Input
           type="text"
           name="city"
           id="city"
@@ -68,11 +71,10 @@ export default function Home() {
             setCity(e.target.value);
             setErrMsg("");
           }}
-          className="text-black border rounded p-2"
         />
 
-        <label>State:</label>
-        <input
+        <Label>State:</Label>
+        <Input
           type="text"
           name="state"
           id="state"
@@ -80,15 +82,11 @@ export default function Home() {
             setState(e.target.value);
             setErrMsg("");
           }}
-          className="text-black border rounded p-2"
         />
 
-        <button
-          className="border rounded p-2 bg-primary hover:bg-muted"
-          type="submit"
-        >
+        <Button className="bg-primary" type="submit">
           Submit
-        </button>
+        </Button>
       </form>
       {errMsg && <p>{errMsg}</p>}
       {isLoading && <p>Loading...</p>}
