@@ -3,16 +3,18 @@ import { useState } from "react";
 import scrape from "@/api/scrape";
 
 export default function Home() {
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [name, setName] = useState("");
-  const [population, setPopulation] = useState("");
-  const [populationChange, setPopulationChange] = useState("");
-  const [medianIncome, setMedianIncome] = useState("");
-  const [medianHomeValue, setMedianHomeValue] = useState("");
-  const [nearestCities, setNearestCities] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [errMsg, setErrMsg] = useState("");
+  const [city, setCity] = useState<string>();
+  const [state, setState] = useState<string>();
+  const [name, setName] = useState<string | undefined>();
+  const [population, setPopulation] = useState<string | undefined>();
+  const [populationChange, setPopulationChange] = useState<
+    string | undefined
+  >();
+  const [medianIncome, setMedianIncome] = useState<string | undefined>();
+  const [medianHomeValue, setMedianHomeValue] = useState<string | undefined>();
+  const [nearestCities, setNearestCities] = useState<string | undefined>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [errMsg, setErrMsg] = useState<string | undefined>();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
