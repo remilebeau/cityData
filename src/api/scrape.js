@@ -68,7 +68,7 @@ export default async function scrape(city, state) {
       WI: "Wisconsin",
       WY: "Wyoming",
     };
-    state = states[state];
+    state = states[state] || state;
   }
   state = state.replace(" ", "-");
   const browser = await puppeteer.launch();
@@ -77,6 +77,11 @@ export default async function scrape(city, state) {
   await page.goto(url);
   const cityData = await page.evaluate(() => {
     const name = document.querySelector("h1").textContent.trim();
+    if (name === "Oops, Page Not Found!") {
+      return {
+        error: "City not found. Please check your spelling and try again.",
+      };
+    }
     const population = document
       .querySelector(".city-population")
       .textContent.trim()

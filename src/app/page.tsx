@@ -2,58 +2,87 @@
 import { useState } from "react";
 import scrape from "@/api/scrape";
 
-type CityData = {
-  name: string;
-  population: string;
-  populationChange: string;
-  medianIncome: string;
-  medianHomeValue: string;
-  nearestCities: string;
-};
-
 export default function Home() {
-  const [cityData, setCityData] = useState<CityData | null>(null);
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [name, setName] = useState("");
+  const [population, setPopulation] = useState("");
+  const [populationChange, setPopulationChange] = useState("");
+  const [medianIncome, setMedianIncome] = useState("");
+  const [medianHomeValue, setMedianHomeValue] = useState("");
+  const [nearestCities, setNearestCities] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const city = formData.get("city") as string;
-    const state = formData.get("state") as string;
-    const data = await scrape(city, state);
-    setCityData(data);
+    setIsLoading(true);
+    setErrMsg("");
+    const {
+      name,
+      population,
+      populationChange,
+      medianIncome,
+      medianHomeValue,
+      nearestCities,
+      error,
+    } = await scrape(city, state);
+    if (error) {
+      setIsLoading(false);
+      setErrMsg("City not found. Please check your spelling and try again.");
+    }
+    setIsLoading(false);
+    setName(name);
+    setPopulation(population);
+    setPopulationChange(populationChange);
+    setMedianIncome(medianIncome);
+    setMedianHomeValue(medianHomeValue);
+    setNearestCities(nearestCities);
   };
   return (
-    <main className="flex flex-col gap-4 p-4">
-      <form onSubmit={handleSubmit}>
-        <label>
-          City:
-          <input
-            type="text"
-            name="city"
-            id="city"
-            className="text-black border rounded p-2"
-          />
-        </label>
-        <label>
-          State:
-          <input
-            type="text"
-            name="state"
-            id="state"
-            className="text-black border rounded p-2"
-          />
-        </label>
-        <button type="submit">Submit</button>
+    <main className="flex flex-col gap-4 p-4 mx-auto max-w-4xl">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <label htmlFor="city">City:</label>
+        <input
+          type="text"
+          name="city"
+          id="city"
+          onChange={(e) => {
+            setCity(e.target.value);
+            setErrMsg("");
+          }}
+          className="text-black border rounded p-2"
+        />
+
+        <label>State:</label>
+        <input
+          type="text"
+          name="state"
+          id="state"
+          onChange={(e) => {
+            setState(e.target.value);
+            setErrMsg("");
+          }}
+          className="text-black border rounded p-2"
+        />
+
+        <button
+          className="border rounded p-2 bg-gray-800 hover:bg-gray-700"
+          type="submit"
+        >
+          Submit
+        </button>
       </form>
-      {!cityData && <p>Loading...</p>}
-      {cityData && (
+      {errMsg && <p>{errMsg}</p>}
+      {isLoading && <p>Loading...</p>}
+      {name && (
         <section className="flex flex-col gap-4">
-          <h1 className="text-4xl font-bold">{cityData.name}</h1>
-          <p>{cityData.population}</p>
-          <p>{cityData.populationChange}</p>
-          <p>{cityData.medianIncome}</p>
-          <p>{cityData.medianHomeValue}</p>
-          <p>{cityData.nearestCities}</p>
+          <h1 className="text-4xl font-bold">{name}</h1>
+          <p>{population}</p>
+          <p>{populationChange}</p>
+          <p>{medianIncome}</p>
+          <p>{medianHomeValue}</p>
+          <p>{nearestCities}</p>
         </section>
       )}
     </main>
