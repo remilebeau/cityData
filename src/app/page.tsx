@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { LoaderPinwheel, CircleX } from "lucide-react";
 
 export default function Home() {
   const [city, setCity] = useState<string>("");
@@ -89,8 +90,20 @@ export default function Home() {
           Submit
         </Button>
       </form>
-      {errMsg && <p>{errMsg}</p>}
-      {isLoading && <p>Loading...</p>}
+      {errMsg && (
+        <section className="flex flex-row gap-4 p-4">
+          <CircleX className="text-red-500" />
+          <p>{errMsg}</p>
+        </section>
+      )}
+      {isLoading && (
+        <>
+          <LoaderPinwheel className="animate-spin" />
+          <p className="text-2xl font-bold">
+            Loading. The first request may take up to 60 seconds...
+          </p>
+        </>
+      )}
       {name && (
         <Card>
           <CardHeader>
