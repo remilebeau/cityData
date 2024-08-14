@@ -1,10 +1,10 @@
 "use client";
 import { useState } from "react";
-import scrape from "@/api/scrape";
+import fetchCityData from "@/lib/fetchCityData";
 
 export default function Home() {
-  const [city, setCity] = useState<string>();
-  const [state, setState] = useState<string>();
+  const [city, setCity] = useState<string>("");
+  const [state, setState] = useState<string>("");
   const [name, setName] = useState<string | undefined>();
   const [population, setPopulation] = useState<string | undefined>();
   const [populationChange, setPopulationChange] = useState<
@@ -27,11 +27,11 @@ export default function Home() {
       medianIncome,
       medianHomeValue,
       nearestCities,
-      error,
-    } = await scrape(city, state);
-    if (error) {
+    } = await fetchCityData(city, state);
+    if (!name) {
+      setErrMsg("City not found. Please check spelling and try again.");
       setIsLoading(false);
-      setErrMsg("City not found. Please check your spelling and try again.");
+      return;
     }
     setIsLoading(false);
     setName(name);
