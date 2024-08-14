@@ -55,8 +55,7 @@ export default function Home() {
       <section className="flex flex-col gap-4 p-4">
         <h1 className="text-4xl font-bold">City Data</h1>
         <p className="text-2xl">
-          Enter a city and state to fetch its population, income, and nearest
-          city stats from{" "}
+          Enter a city and state to fetch some of its stats from{" "}
           <a
             className="text-blue-500 hover:opacity-80 font-bold"
             href="https://www.city-data.com/"
