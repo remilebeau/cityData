@@ -4,6 +4,7 @@ import fetchCityData from "@/lib/fetchCityData";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function Home() {
   const [city, setCity] = useState<string>("");
@@ -91,14 +92,18 @@ export default function Home() {
       {errMsg && <p>{errMsg}</p>}
       {isLoading && <p>Loading...</p>}
       {name && (
-        <section className="flex flex-col gap-4">
-          <h1 className="text-4xl font-bold">{name}</h1>
-          <p>{population}</p>
-          <p>{populationChange}</p>
-          <p>{medianIncome}</p>
-          <p>{medianHomeValue}</p>
-          <p>{nearestCities}</p>
-        </section>
+        <Card>
+          <CardHeader>
+            <CardTitle>{name}</CardTitle>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-4">
+            <p>{population}</p>
+            <p>{populationChange}</p>
+            <p>{medianIncome}</p>
+            <p>{medianHomeValue}</p>
+            <p>{nearestCities}</p>
+          </CardContent>
+        </Card>
       )}
     </main>
   );
