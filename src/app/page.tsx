@@ -42,7 +42,22 @@ export default function Home() {
     setNearestCities(nearestCities);
   };
   return (
-    <main className="flex flex-col gap-4 p-4 mx-auto max-w-4xl">
+    <main className="flex flex-col gap-4 p-4 mx-auto max-w-4xl min-h-screen">
+      <section className="flex flex-col gap-4 p-4">
+        <h1 className="text-4xl font-bold">City Data</h1>
+        <p className="text-2xl">
+          Enter a city and state to fetch its population, income, and nearest
+          city stats from{" "}
+          <a
+            className="text-blue-500 hover:opacity-80 font-bold"
+            href="https://www.city-data.com/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            City-Data
+          </a>
+        </p>
+      </section>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <label htmlFor="city">City:</label>
         <input
@@ -69,7 +84,7 @@ export default function Home() {
         />
 
         <button
-          className="border rounded p-2 bg-gray-800 hover:bg-gray-700"
+          className="border rounded p-2 bg-primary hover:bg-muted"
           type="submit"
         >
           Submit
