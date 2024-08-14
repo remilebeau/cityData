@@ -1,12 +1,12 @@
 type CityData = {
-  name: string;
-  population: string;
-  populationChange: string;
-  medianIncome: string;
-  medianHomeValue: string;
-  crimeRate: string;
-  educationAndCommute: string[];
-  nearestCities: string;
+  name?: string;
+  population?: string;
+  populationChange?: string;
+  medianIncome?: string;
+  medianHomeValue?: string;
+  crimeRate?: string;
+  educationAndCommute?: string[];
+  nearestCities?: string;
 };
 
 export default async function fetchCityData(

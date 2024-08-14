@@ -119,8 +119,14 @@ export default function Home() {
             <h2 className="text-xl font-bold">Income and Home Value</h2>
             <p>{medianIncome}</p>
             <p>{medianHomeValue}</p>
-            <h2 className="text-xl font-bold">Crime</h2>
-            <p>Crime rate in 2022: {crimeRate} (The U.S. average is 246.1)</p>
+            {crimeRate && (
+              <>
+                <h2 className="text-xl font-bold">Crime</h2>
+                <p>
+                  Crime rate in 2022: {crimeRate} (The U.S. average is 246.1)
+                </p>
+              </>
+            )}
             <h2 className="text-xl font-bold">Education and Commute</h2>
             {educationAndCommute?.map((education, index) => (
               <p key={index}>{education}</p>
