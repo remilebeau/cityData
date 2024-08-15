@@ -68,7 +68,7 @@ export default function Home() {
         <p className="text-2xl">
           City-Data sees over 14 million users per month and has been featured
           in 121 books, on CNN, WABC in New York, Bay News 9 in Tampa Bay and
-          USA Today's Hot Sites, among others.
+          USA Today&apos;s Hot Sites, among others.
         </p>
       </section>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
