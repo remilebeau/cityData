@@ -64,6 +64,7 @@ export default function Home() {
           >
             City-Data
           </a>
+          .
         </p>
         <p className="text-2xl">
           City-Data sees over 14 million users per month and has been featured
@@ -71,9 +72,8 @@ export default function Home() {
           USA Today&apos;s Hot Sites, among others.
         </p>
         <p className="text-2xl">
-          Note: Because of the variance in the data returned by City-Data, not
-          all U.S. cities are supported on this app. If a second request is
-          taking more than 10 seconds, please visit{" "}
+          Note: Not all U.S. cities are supported on this app. If a second
+          request takes more than 10 seconds, please visit{" "}
           <a
             className="text-blue-500 hover:opacity-80 font-bold"
             href="https://www.city-data.com/"
