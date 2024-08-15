@@ -70,6 +70,20 @@ export default function Home() {
           in 121 books, on CNN, WABC in New York, Bay News 9 in Tampa Bay and
           USA Today&apos;s Hot Sites, among others.
         </p>
+        <p className="text-2xl">
+          Note: Because of the variance in the data returned by City-Data, not
+          all U.S. cities are supported on this app. If a second request is
+          taking more than 10 seconds, please visit{" "}
+          <a
+            className="text-blue-500 hover:opacity-80 font-bold"
+            href="https://www.city-data.com/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            City-Data
+          </a>{" "}
+          directly.
+        </p>
       </section>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <Label htmlFor="city">City:</Label>
