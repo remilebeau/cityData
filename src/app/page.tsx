@@ -100,12 +100,13 @@ export default function Home() {
         </section>
       )}
       {isLoading && (
-        <>
+        <section className="flex flex-col items-center gap-4 p-4">
           <LoaderPinwheel className="animate-spin" />
+          <p className="text-2xl font-bold">Loading...</p>
           <p className="text-2xl font-bold">
-            Loading. The first request may take up to 60 seconds...
+            The first request may take up to 60 seconds.
           </p>
-        </>
+        </section>
       )}
       {name && (
         <Card>
