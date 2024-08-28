@@ -52,39 +52,42 @@ export default function Home() {
   };
   return (
     <main className="flex flex-col gap-4 p-4 mx-auto max-w-4xl">
-      <section className="flex flex-col gap-4 p-4">
-        <h1 className="text-4xl font-bold">City Data</h1>
-        <p className="text-2xl">
-          Enter a U.S. city and state to fetch some of its stats from{" "}
-          <a
-            className="text-blue-500 hover:opacity-80 font-bold"
-            href="https://www.city-data.com/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            City-Data
-          </a>
-          .
-        </p>
-        <p className="text-2xl">
-          City-Data sees over 14 million users per month and has been featured
-          in 121 books, on CNN, WABC in New York, Bay News 9 in Tampa Bay and
-          USA Today&apos;s Hot Sites, among others.
-        </p>
-        <p className="text-2xl">
-          Note: Not all U.S. cities are supported on this app. If a second
-          request takes more than 10 seconds, please visit{" "}
-          <a
-            className="text-blue-500 hover:opacity-80 font-bold"
-            href="https://www.city-data.com/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            City-Data
-          </a>{" "}
-          directly.
-        </p>
-      </section>
+      {!name && (
+        <section className="flex flex-col gap-4 p-4">
+          <h1 className="text-4xl font-bold">City Data</h1>
+          <p className="text-2xl">
+            Enter a U.S. city and state to fetch some of its stats from{" "}
+            <a
+              className="text-blue-500 hover:opacity-80 font-bold"
+              href="https://www.city-data.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              City-Data
+            </a>
+            .
+          </p>
+          <p className="text-2xl">
+            City-Data sees over 14 million users per month and has been featured
+            in 121 books, on CNN, WABC in New York, Bay News 9 in Tampa Bay and
+            USA Today&apos;s Hot Sites, among others.
+          </p>
+          <p className="text-2xl">
+            Note: Not all U.S. cities are supported on this app. If a second
+            request takes more than 10 seconds, please visit{" "}
+            <a
+              className="text-blue-500 hover:opacity-80 font-bold"
+              href="https://www.city-data.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              City-Data
+            </a>{" "}
+            directly.
+          </p>
+        </section>
+      )}
+
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <Label htmlFor="city">City:</Label>
         <Input
