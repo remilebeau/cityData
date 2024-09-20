@@ -88,9 +88,10 @@ export default function Home() {
         </section>
       )}
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 ">
         <Label htmlFor="city">City:</Label>
         <Input
+          className="text-black"
           type="text"
           name="city"
           id="city"
@@ -102,6 +103,7 @@ export default function Home() {
 
         <Label>State:</Label>
         <Input
+          className="text-black"
           type="text"
           name="state"
           id="state"
@@ -111,7 +113,7 @@ export default function Home() {
           }}
         />
 
-        <Button className="bg-primary" type="submit">
+        <Button className="bg-teal-700" type="submit">
           Submit
         </Button>
       </form>
