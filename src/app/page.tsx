@@ -133,7 +133,7 @@ export default function Home() {
         </section>
       )}
       {name && (
-        <Card>
+        <Card className="bg-teal-700 text-white">
           <CardHeader>
             <CardTitle>{name}</CardTitle>
           </CardHeader>
