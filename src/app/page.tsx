@@ -113,7 +113,10 @@ export default function Home() {
           }}
         />
 
-        <Button className="bg-teal-700" type="submit">
+        <Button
+          className="bg-teal-700 hover:bg-black transition-all duration-300 ease-in-out"
+          type="submit"
+        >
           Submit
         </Button>
       </form>
