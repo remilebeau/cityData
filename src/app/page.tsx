@@ -114,7 +114,7 @@ export default function Home() {
         />
 
         <Button
-          className="bg-teal-700 hover:bg-black transition-all duration-300 ease-in-out"
+          className="bg-green-700 hover:bg-black transition-all duration-300 ease-in-out"
           type="submit"
         >
           Submit
@@ -136,7 +136,7 @@ export default function Home() {
         </section>
       )}
       {name && (
-        <Card className="bg-teal-700 text-white">
+        <Card className=" bg-black text-white">
           <CardHeader>
             <CardTitle>{name}</CardTitle>
           </CardHeader>
