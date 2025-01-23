@@ -1,30 +1,43 @@
 "use client";
 import { useState } from "react";
 import fetchCityData from "@/lib/fetchCityData";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LoaderPinwheel, CircleX } from "lucide-react";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+
+// Define form schema
+const formSchema = z.object({
+  city: z.string().min(2),
+  state: z.string().length(2),
+});
 
 export default function Home() {
-  const [city, setCity] = useState<string>("");
-  const [state, setState] = useState<string>("");
-  const [name, setName] = useState<string>();
-  const [population, setPopulation] = useState<string>();
-  const [populationChange, setPopulationChange] = useState<string>();
-  const [medianIncome, setMedianIncome] = useState<string>();
-  const [medianHomeValue, setMedianHomeValue] = useState<string>();
-  const [crimeRate, setCrimeRate] = useState<string>();
-  const [educationAndCommute, setEducationAndCommute] = useState<string[]>();
-  const [nearestCities, setNearestCities] = useState<string>();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [errMsg, setErrMsg] = useState<string>();
+  // Define form
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      city: "",
+      state: "",
+    },
+  });
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  // Submit handler
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
     setErrMsg("");
+    const { city, state } = values;
     const {
       name,
       population,
@@ -49,7 +62,19 @@ export default function Home() {
     setCrimeRate(crimeRate);
     setEducationAndCommute(educationAndCommute);
     setNearestCities(nearestCities);
-  };
+  }
+  // State for fetched data
+  const [name, setName] = useState<string>();
+  const [population, setPopulation] = useState<string>();
+  const [populationChange, setPopulationChange] = useState<string>();
+  const [medianIncome, setMedianIncome] = useState<string>();
+  const [medianHomeValue, setMedianHomeValue] = useState<string>();
+  const [crimeRate, setCrimeRate] = useState<string>();
+  const [educationAndCommute, setEducationAndCommute] = useState<string[]>();
+  const [nearestCities, setNearestCities] = useState<string>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [errMsg, setErrMsg] = useState<string>();
+
   return (
     <main className="flex flex-col gap-4 p-4 mx-auto max-w-4xl">
       {!name && (
@@ -88,33 +113,39 @@ export default function Home() {
         </section>
       )}
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 ">
-        <Label htmlFor="city">City:</Label>
-        <Input
-          className="text-black"
-          type="text"
-          name="city"
-          id="city"
-          onChange={(e) => {
-            setCity(e.target.value);
-            setErrMsg("");
-          }}
-        />
-
-        <Label>State:</Label>
-        <Input
-          className="text-black"
-          type="text"
-          name="state"
-          id="state"
-          onChange={(e) => {
-            setState(e.target.value);
-            setErrMsg("");
-          }}
-        />
-
-        <Button type="submit">Submit</Button>
-      </form>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <FormField
+            control={form.control}
+            name="city"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>City</FormLabel>
+                <FormControl>
+                  <Input className="rounded-xl" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="state"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>State</FormLabel>
+                <FormControl>
+                  <Input className="rounded-xl" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button className="rounded-xl w-full" type="submit">
+            Submit
+          </Button>
+        </form>
+      </Form>
       {errMsg && (
         <section className="flex flex-row gap-4 p-4">
           <CircleX className="text-red-500" />
@@ -131,7 +162,7 @@ export default function Home() {
         </section>
       )}
       {name && (
-        <Card className=" bg-black text-white">
+        <Card>
           <CardHeader>
             <CardTitle>{name}</CardTitle>
           </CardHeader>
