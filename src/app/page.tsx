@@ -113,12 +113,7 @@ export default function Home() {
           }}
         />
 
-        <Button
-          className="bg-green-700 hover:bg-black transition-all duration-300 ease-in-out"
-          type="submit"
-        >
-          Submit
-        </Button>
+        <Button type="submit">Submit</Button>
       </form>
       {errMsg && (
         <section className="flex flex-row gap-4 p-4">
